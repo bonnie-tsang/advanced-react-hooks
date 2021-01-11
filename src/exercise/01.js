@@ -64,23 +64,35 @@ export default App
 // import { useState, useReducer } from 'react';
 
 
-// // type CounterProps = {
-// //   initialCount?: number,
-// //   step?: number,
-// // };
+// type CounterProps = {
+//   initialCount?: number,
+//   step?: number,
+// };
 
 
-// // type CounterState = {
-// //   count: number,
-// //   label: string,
-// // };
+// type CounterState = {
+//   count: number,
+//   label: string,
+// };
+
+
+// type ActionType = 'label' | 'count';
+// type Action = UpdateCount | UpdateLabel;
+// type UpdateCount = {
+//   type: 'count',
+//   step: number,
+// };
+// type UpdateLabel = {
+//   type: 'label',
+//   label: string,
+// };
 
 
 // /**
 //  * REDUCER
 //  */
-// const stateReducer = (prevState, action) => {
-//   let result = prevState;
+// const stateReducer = (prevState: CounterState, action: Action): CounterState => {
+//   let result: CounterState = prevState;
 
 //   switch(action.type){
 //     case 'count': 
@@ -96,9 +108,6 @@ export default App
 //         label: action.label,
 //       };
 //       break;
-
-//     default:
-//       result = prevState;
 //   }
 
 //   return result;
@@ -108,18 +117,16 @@ export default App
 // /**
 //  * COMPONENT
 //  */
-// const Counter = function Counter(props) {
+// const Counter: React.FC<CounterProps> = function Counter(props) {
 //   const {
 //     initialCount = 0,
 //     step = 1,
 //   } = props;
 
-//   const [oldState, setOldState] = useState({
+//   const [oldState, setOldState] = useState<CounterState>({
 //     count: initialCount,
 //     label: 'My label',
 //   });
-
-//   const [textValue, setTextValue] = useState('My label');
 
 //   const [state, setState] = useReducer(stateReducer, {
 //     count: initialCount,
@@ -132,12 +139,12 @@ export default App
 //   const { count } = state;
 //   const handleClick = () => {
 
-//     setOldState((prevState) => {
+//     setOldState((prevState: CounterState): CounterState => {
 //       const nextCount = {
 //         count: count + step,
 //       };
 
-//       const newState = {
+//       const newState: CounterState = {
 //         ...prevState,
 //         ...nextCount,
 //       };
@@ -147,34 +154,12 @@ export default App
 
 //     setState({
 //       type: 'count',
-//       step: 2,
+//       step: step,
 //     });
 
 //   };
 
-//   const handleClick2 = () => {
-//     setState({
-//       type: 'label',
-//       label: textValue,
-//     });
-//   }
-
-//   return (
-//     <>
-//       <div>
-//         <button onClick={handleClick}>{ state.label }: { count }</button>
-//       </div>
-
-//       <div>
-//         <input type="text" 
-//           value={textValue}
-//           onChange={e => setTextValue(e.currentTarget.value)}
-//         />
-//         <button onClick={handleClick2}>Set label</button>
-
-//       </div>
-//     </>
-//   );
+//   return (<button onClick={handleClick}>{ state.label }: { count }</button>);
 // }
 
 // function App() {
